@@ -208,3 +208,76 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Grab the modal and its elements by their unique IDs
+  const workModal        = document.getElementById("workModal");
+  const modalTitle       = document.getElementById("workModalTitle");
+  const modalImage       = document.getElementById("workModalImage");
+  const modalDescription = document.getElementById("workModalDescription");
+  const closeBtn         = workModal.querySelector(".close-modal");
+
+  // All of your work-experience data
+  const workExperiences = {
+    cf: {
+      title: "MS DS Course Facilitator",
+      image: "img/work-4.jpeg",
+      description: "<p>• Supported student success by facilitating graduate-level courses including DTSA 5509 (Intro to Machine Learning), DTSA 5747 (Fundamentals of NLP), DTSA 5841 (IBM Capstone), and DTSA 5842/5843 (Effective Communication for Data Science).</p><p>• Managed course logistics such as manual grading, content updates, plagiarism checks, and grade verification while maintaining student engagement through announcements, office hours, and discussion forums.</p><p>• Collaborated with lead facilitators to beta test new courses, monitored Coursera and Salesforce platforms, and addressed student queries across credit and non-credit sessions.</p>"
+
+    },
+    cadcam: {
+      title: "Machine Learning and UI Development Intern",
+      image: "img/work-1.jpeg",
+      description: 
+        "<p>• Spearheaded a custom recommendation system in AWS SageMaker using K-means and BGE-M3, achieving 86% accuracy for “Clariti”, used by 600+ employees at client companies like Weather Shield and Chemtech Plastics.</p>" +
+        "<p>• Created dashboards and analyzed client data from Clariti and CADCAM-E software users to improve app efficiency and interoperability.</p>" +
+        "<p>• Devised a Retrieval-Augmented Generation (RAG) system by experimenting with 5+ LLMs (Llama 2/3, Falcon, Gemma, Phi3) to summarize in-app conversations.</p>" +
+        "<p>• Leveraged SQL daily to extract, manipulate, and optimize large datasets, streamlining data retrieval processes.</p>"
+    },
+    resolute: {
+      title: "Deep Learning Engineer Intern",
+      image: "img/work-2.png",
+      description:
+        "<p>• Directed a team of 4 for data annotation; built custom YOLOv4 object-detection models to client specs.</p>" +
+        "<p>• Developed counting algorithms for pipes and towels in live feeds, with 92% accuracy.</p>" +
+        "<p>• Optimized OCR for PDF forms, cutting processing time by 13%.</p>" +
+        "<p>• Designed a PowerBI dashboard to visualize model performance, boosting accuracy by 15% with clear insights.</p>"
+    },
+    cmu: {
+      title: "Research Intern @ Xu Lab",
+      image: "img/work-3.jpg",
+      description:
+        "<p>• Conducted literature reviews on Cryo-Electron Subtomogram Segmentation; identified key research gaps.</p>" +
+        "<p>• Implemented baseline deep-learning segmentation models to improve accuracy.</p>" +
+        "<p>• Collaborated with Prof. Xingjian Li on methodology comparison and high-resolution biological imaging improvements.</p>"
+    }
+  };  
+  // :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1}
+
+  // When any .work-box is clicked, populate and show the modal
+  document.querySelectorAll(".work-box").forEach(card => {
+    const id = card.getAttribute("data-id");
+    card.addEventListener("click", () => {
+      if (id && workExperiences[id]) {
+        const data = workExperiences[id];
+        modalTitle.textContent      = data.title;
+        modalImage.src             = data.image;
+        modalDescription.innerHTML = data.description;
+        workModal.style.display    = "block";
+      }
+    });
+  });
+
+  // Close the modal when the “×” is clicked
+  closeBtn.addEventListener("click", () => {
+    workModal.style.display = "none";
+  });
+
+  // Or when clicking outside the modal content
+  window.addEventListener("click", (e) => {
+    if (e.target === workModal) {
+      workModal.style.display = "none";
+    }
+  });
+});
